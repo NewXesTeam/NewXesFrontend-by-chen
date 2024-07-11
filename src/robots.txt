@@ -1,0 +1,2 @@
+User-agent: *
+Disallow: /turbowarp/embed.html
