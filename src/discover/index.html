@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学而思编程 - 受益一生的能力</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/index.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    <script src="/static/js/jquery.min.js"></script>
+</head>
+
+<body>
+    <noscript>肥肠抱歉，js无了，tm能用。</noscript>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/static/images/logo.png" alt="Logo" width="190" height="37"
+                    class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">主页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/discover">发现</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">codeUP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">软件下载</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ms-auto">
+                    <form class="d-flex" role="search" action="https://code.xueersi.com/search-center">
+                        <input class="form-control me-2" type="search" placeholder="搜索" aria-label="搜索" name="keyword">
+                    </form>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            消息 <span class="badge text-bg-secondary" id="messages-count">0</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">评论与回复 <span class="badge text-bg-secondary"
+                                        id="messages-category-1-count">0</span></a></li>
+                            <li><a class="dropdown-item" href="#">点赞与收藏 <span class="badge text-bg-secondary"
+                                        id="messages-category-2-count">0</span></a></li>
+                            <li><a class="dropdown-item" href="#">关注消息 <span class="badge text-bg-secondary"
+                                        id="messages-category-5-count">0</span></a></li>
+                            <li><a class="dropdown-item" href="#">反馈与审核 <span class="badge text-bg-secondary"
+                                        id="messages-category-3-count">0</span></a></li>
+                            <li><a class="dropdown-item" href="#">系统消息 <span class="badge text-bg-secondary"
+                                        id="messages-category-4-count">0</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            用户
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">个人主页</a></li>
+                            <li><a class="dropdown-item" href="#">作品管理</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">社区公约</a></li>
+                            <li><a class="dropdown-item" href="#">帮助中心</a></li>
+                            <li><a class="dropdown-item" href="#">建议反馈</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">退出</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            创作
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/turbowarp/editor.html">TurboWarp</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Python基础</a></li>
+                            <li><a class="dropdown-item" href="#">Python画图</a></li>
+                            <li><a class="dropdown-item" href="#">Python游戏</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">C++</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-4"
+        id="project-discover"></div>
+
+    <!-- 翻页组件 还未完工
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled" id="page-prev">
+                <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#" id="page-next">1</a></li>
+            <li class="page-item"><a class="page-link" href="#" id="page-next">2</a></li>
+            <li class="page-item"><a class="page-link" href="#" id="page-next">3</a></li>
+            <li class="page-item"><a class="page-link" href="#" id="page-next">...</a></li>
+            <li class="page-item"><input type="text" class="form-control" aria-label="Page..."
+                    style="border-radius: 0px;"></li>
+            <li class="page-item"><a class="page-link" href="#" id="page-next">...</a></li>
+            <li class="page-item"><a class="page-link" href="#" id="page-next">200</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" id="page-next">Next</a>
+            </li>
+        </ul>
+    </nav>-->
+
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/project.js"></script>
+    <script src="/static/js/messages.js"></script>
+    <script>
+        project_discover_latest("project-discover", 1, 50)
+    </script>
+</body>
+
+</html>
