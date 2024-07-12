@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wake Lock - TurboWarp Extension Documentation</title>
+    <link rel="canonical" href="/turbowarp/extensions/DNin/wake-lock.html">
+    <style>
+      :root {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color-scheme: light dark;
+        font-size: 16px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color: #eee;
+          background: #131313;
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        a {
+          color: #56b2ff;
+        }
+        a:visited {
+          color: #f192ff;
+        }
+        a:active {
+          color: red;
+        }
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        line-height: 1.3;
+      }
+
+      nav {
+        background-color: #ff4c4c;
+        color: white;
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+      nav > div {
+        display: flex;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      nav a {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.5rem 0.25rem 0.5rem 0;
+        align-items: center;
+        text-decoration: none;
+        color: inherit !important;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      nav img {
+        width: 2rem;
+        height: 2rem;
+        flex-shrink: 0;
+      }
+      @media (prefers-color-scheme: dark) {
+        nav {
+          background-color: #333;
+        }
+      }
+
+      noscript {
+        font-weight: bold;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 0 0.25rem;
+      }
+      h1 {
+        font-size: 2.25rem;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        border-bottom: 1px solid #ccc;
+      }
+      hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 1rem 0;
+      }
+      @media (prefers-color-scheme: dark) {
+        hr, h1, h2, h3, h4, h5, h6 {
+          border-color: #444;
+        }
+      }
+
+      code {
+        background-color: #eee;
+        border-radius: 4px;
+        padding: 0 2px;
+      }
+      pre {
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 4px;
+        overflow-x: auto;
+      }
+      @media (prefers-color-scheme: dark) {
+        code, pre {
+          background-color: #223;
+          border-color: #334;
+        }
+      }
+
+      .render-scratchblocks {
+        width: 100%;
+        overflow-x: auto;
+        white-space: pre;
+        line-height: 42px; /* reasonable estimation to reduce layout shift */
+      }
+      .render-scratchblocks svg {
+        display: block;
+      }
+
+      footer {
+        margin: 1rem 0;
+        font-size: small;
+      }
+    </style>
+  </head>
+  <body>
+    <nav role="navigation">
+      <div>
+      <a href="/turbowarp/extensions/">
+        <img src="/favicon.ico" alt="">
+        <span>TurboWarp 扩展库</span>
+      </a>
+      </div>
+    </nav>
+
+    <main class="container">
+      <h1>Wake Lock</h1>
+
+      <noscript><p>Enable JavaScript for blocks to render.</p></noscript>
+
+      <p>The Wake Lock feature allows you to keep your computer's screen on while a project is running. This can be helpful when playing media or performing an important but time-consuming task.</p>
+<h2>Activating and Releasing Wake Lock</h2>
+<div class="render-scratchblocks">set wake lock to [on v] :: #0FBD8C
+</div><p>This block will activate wake lock.</p>
+<p>If you ever need to check that wake lock has properly been activated, use the <code>is wake lock active?</code> boolean reporter.</p>
+<p>To release wake lock, simply change &quot;on&quot; to &quot;off&quot;.</p>
+<p>You can also insert boolean reporters into the menu input.</p>
+<p>Wake lock will also be released automatically when the project stops or is restarted to ensure it isn't accidentally left on forever.</p>
+<h2>Browser support</h2>
+<p>Not all browsers support wake lock (notably, Firefox does not). In these browsers requesting wake lock will not do anything.</p>
+<h2>Note</h2>
+<p>The wake lock block takes a moment to finish running as it activates wake lock, so if you put it in a script with other blocks, it will yield briefly, so try keeping it separate from your other scripts. The <code>is wake lock active?</code> boolean reporter, however, does not have a delay.</p>
+
+
+      <hr>
+
+      <footer>
+        <p>
+          This page is <a href="https://github.com/TurboWarp/extensions/tree/master/docs">open source</a>.
+          
+            Blocks rendered with <a href="https://scratchblocks.github.io/">scratchblocks</a>.
+          
+        </p>
+        <p>TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation.</p>
+      </footer>
+    </main>
+
+    
+      <script src="/turbowarp/extensions/docs-internal/scratchblocks.js"></script>
+      <script>
+        scratchblocks.renderMatching('.render-scratchblocks', {
+          style: 'scratch3'
+        });
+      </script>
+    
+  </body>
+</html>

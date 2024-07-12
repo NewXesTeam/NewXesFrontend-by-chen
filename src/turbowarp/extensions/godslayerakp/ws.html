@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WebSocket - TurboWarp Extension Documentation</title>
+    <link rel="canonical" href="/turbowarp/extensions/godslayerakp/ws.html">
+    <style>
+      :root {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color-scheme: light dark;
+        font-size: 16px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color: #eee;
+          background: #131313;
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        a {
+          color: #56b2ff;
+        }
+        a:visited {
+          color: #f192ff;
+        }
+        a:active {
+          color: red;
+        }
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        line-height: 1.3;
+      }
+
+      nav {
+        background-color: #ff4c4c;
+        color: white;
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+      nav > div {
+        display: flex;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      nav a {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.5rem 0.25rem 0.5rem 0;
+        align-items: center;
+        text-decoration: none;
+        color: inherit !important;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      nav img {
+        width: 2rem;
+        height: 2rem;
+        flex-shrink: 0;
+      }
+      @media (prefers-color-scheme: dark) {
+        nav {
+          background-color: #333;
+        }
+      }
+
+      noscript {
+        font-weight: bold;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 0 0.25rem;
+      }
+      h1 {
+        font-size: 2.25rem;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        border-bottom: 1px solid #ccc;
+      }
+      hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 1rem 0;
+      }
+      @media (prefers-color-scheme: dark) {
+        hr, h1, h2, h3, h4, h5, h6 {
+          border-color: #444;
+        }
+      }
+
+      code {
+        background-color: #eee;
+        border-radius: 4px;
+        padding: 0 2px;
+      }
+      pre {
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 4px;
+        overflow-x: auto;
+      }
+      @media (prefers-color-scheme: dark) {
+        code, pre {
+          background-color: #223;
+          border-color: #334;
+        }
+      }
+
+      .render-scratchblocks {
+        width: 100%;
+        overflow-x: auto;
+        white-space: pre;
+        line-height: 42px; /* reasonable estimation to reduce layout shift */
+      }
+      .render-scratchblocks svg {
+        display: block;
+      }
+
+      footer {
+        margin: 1rem 0;
+        font-size: small;
+      }
+    </style>
+  </head>
+  <body>
+    <nav role="navigation">
+      <div>
+      <a href="/turbowarp/extensions/">
+        <img src="/favicon.ico" alt="">
+        <span>TurboWarp 扩展库</span>
+      </a>
+      </div>
+    </nav>
+
+    <main class="container">
+      <h1>WebSocket</h1>
+
+      <noscript><p>Enable JavaScript for blocks to render.</p></noscript>
+
+      <p>This extension lets you communicate directly with most <a href="https://en.wikipedia.org/wiki/WebSocket">WebSocket</a> servers. This is the protocol that things like cloud variables and Cloudlink use.</p>
+<p>These are rather low level blocks. They let you establish the connection, but your project still needs to know what kinds of messages to send and how to read messages from the server.</p>
+<h2>Blocks</h2>
+<div class="render-scratchblocks">connect to [wss://...] :: #307eff
+</div><p>You have to run this block before any of the other blocks can do anything. You need to provide a valid WebSocket URL.</p>
+<p>The URL should start with <code>ws://</code> or <code>wss://</code>. For security reasons, <code>ws://</code> URLs will usually only work if the WebSocket is running on your computer (for example, <code>ws://localhost:8000</code>).</p>
+<p>Something simple to play with is the echo server: <code>wss://echoserver.redman13.repl.co</code>. Any message you send to it, it'll send right back to you.</p>
+<p>Note that connections are <strong>per sprite</strong>. Each sprite (or clone) can connect to one server at a time. Multiple sprites can connect to the same or different servers as much as your computer allows, but note those will all be separate connections.</p>
+<hr>
+<div class="render-scratchblocks">when connected :: hat #307eff
+</div><br>
+<div class="render-scratchblocks">&lt;is connected? :: #307eff &gt;
+</div><p>Connecting to the server can take some time. Use these blocks to know when the connection was successful. After this, you can start sending and receiving messages.</p>
+<p>When the connection is lost, any blocks under the hat will also be stopped.</p>
+<hr>
+<div class="render-scratchblocks">when message received :: hat #307eff
+</div><br>
+<div class="render-scratchblocks">(received message data :: #307eff)
+</div><p>These blocks let you receive messages from the server. The hat block block will run once for each message the server sends with the data stored in the round reporter block.</p>
+<p>Note that WebSocket supports two types of messages:</p>
+<ul>
+<li><strong>Text messages</strong>: The data in the block will just be the raw text from the server.</li>
+<li><strong>Binary messages</strong>: The data in the block will be a base64-encoded data: URL of the data, as it may not be safe to store directly in a string. You can use other extensions to convert this to something useful, such as fetch, depending on what data it contains.</li>
+</ul>
+<p>If multiple messages are received in a single frame or if your message processing logic causes delays (for example, using wait blocks), messages after the first one will be placed in a <strong>queue</strong>. Once your script finishes, if there's anything in the queue, the &quot;when message received&quot; block will run again the next frame.</p>
+<hr>
+<div class="render-scratchblocks">send message (...) :: #307eff 
+</div><p>This is the other side: it lets you send messages to the server. Only text messages are supported; binary messages are not yet supported.</p>
+<p>There's no queue this time. The messages are sent over as fast as your internet connection and the server will allow.</p>
+<hr>
+<div class="render-scratchblocks">when connection closes :: hat #307eff
+</div><br>
+<div class="render-scratchblocks">&lt;is connection closed? :: #307eff&gt;
+</div><br>
+<p>These let you detect when either the server closes the connection or your project closes the connection. They don't distinguish. Note that connections have separate blocks.</p>
+<p>Servers can close connections for a lot of reasons: perhaps it's restarting, or perhaps your project tried to do something the server didn't like.</p>
+<div class="render-scratchblocks">(closing code :: #307eff)
+</div><br>
+<div class="render-scratchblocks">(closing message :: #307eff)
+</div><p>These blocks can help you gain some insight. Closing code is a number from the WebSocket protocol. There is a <a href="https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent/code#value">big table</a> of possible values, but generally there is very little to gain from looking at these.</p>
+<p>Servers can also send a text &quot;reason&quot; when they close the connection, although almost no servers actually do this.</p>
+<div class="render-scratchblocks">close connection :: #307eff
+</div><br>
+<div class="render-scratchblocks">close connection with code (1000) :: #307eff
+</div><br>
+<div class="render-scratchblocks">close connection with reason (...) and code (1000) :: #307eff
+</div><p>Your project can also close the connection whenever it wants. All of these blocks do basically the same thing.</p>
+<p>Just like how the server can send a code and a reason when it closes the connection, you can send those to the server. Note some limitations:</p>
+<ul>
+<li><strong>Code</strong> can be either the number 1000 (&quot;Normal Closure&quot;) or an integer in the range 3000-4999 (meaning depends on what server you're talking to). Anything not in this range will be converted to 1000. Few servers will look at this.</li>
+<li><strong>Reason</strong> can be any text up to 123-bytes long when encoded as UTF-8. Usually that just means up to 123 characters, but things like Emoji are technically multiple characters. Regardless very few servers will even bother to look at this.</li>
+</ul>
+<hr>
+<div class="render-scratchblocks">when connection errors :: hat #307eff
+</div><br>
+<div class="render-scratchblocks">&lt;is connection errored? :: #307eff&gt;
+</div><p>Sometimes things don't go so well. Maybe your internet connection died, the server is down, or you typed in the wrong URL. There's a lot of things that can go wrong. These let you try to handle that.</p>
+<p>Unfortunately we can't give much insight as to what caused the errors. Your browser tells us very little, but even if it did give us more information, it probably wouldn't be very helpful.</p>
+<p>A connection can either close or error; it won't do both.</p>
+
+
+      <hr>
+
+      <footer>
+        <p>
+          This page is <a href="https://github.com/TurboWarp/extensions/tree/master/docs">open source</a>.
+          
+            Blocks rendered with <a href="https://scratchblocks.github.io/">scratchblocks</a>.
+          
+        </p>
+        <p>TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation.</p>
+      </footer>
+    </main>
+
+    
+      <script src="/turbowarp/extensions/docs-internal/scratchblocks.js"></script>
+      <script>
+        scratchblocks.renderMatching('.render-scratchblocks', {
+          style: 'scratch3'
+        });
+      </script>
+    
+  </body>
+</html>

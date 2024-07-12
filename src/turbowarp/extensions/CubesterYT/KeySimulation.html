@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Key Simulation - TurboWarp Extension Documentation</title>
+    <link rel="canonical" href="/turbowarp/extensions/CubesterYT/KeySimulation.html">
+    <style>
+      :root {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color-scheme: light dark;
+        font-size: 16px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color: #eee;
+          background: #131313;
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        a {
+          color: #56b2ff;
+        }
+        a:visited {
+          color: #f192ff;
+        }
+        a:active {
+          color: red;
+        }
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        line-height: 1.3;
+      }
+
+      nav {
+        background-color: #ff4c4c;
+        color: white;
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+      nav > div {
+        display: flex;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      nav a {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.5rem 0.25rem 0.5rem 0;
+        align-items: center;
+        text-decoration: none;
+        color: inherit !important;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      nav img {
+        width: 2rem;
+        height: 2rem;
+        flex-shrink: 0;
+      }
+      @media (prefers-color-scheme: dark) {
+        nav {
+          background-color: #333;
+        }
+      }
+
+      noscript {
+        font-weight: bold;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 0 0.25rem;
+      }
+      h1 {
+        font-size: 2.25rem;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        border-bottom: 1px solid #ccc;
+      }
+      hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 1rem 0;
+      }
+      @media (prefers-color-scheme: dark) {
+        hr, h1, h2, h3, h4, h5, h6 {
+          border-color: #444;
+        }
+      }
+
+      code {
+        background-color: #eee;
+        border-radius: 4px;
+        padding: 0 2px;
+      }
+      pre {
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 4px;
+        overflow-x: auto;
+      }
+      @media (prefers-color-scheme: dark) {
+        code, pre {
+          background-color: #223;
+          border-color: #334;
+        }
+      }
+
+      .render-scratchblocks {
+        width: 100%;
+        overflow-x: auto;
+        white-space: pre;
+        line-height: 42px; /* reasonable estimation to reduce layout shift */
+      }
+      .render-scratchblocks svg {
+        display: block;
+      }
+
+      footer {
+        margin: 1rem 0;
+        font-size: small;
+      }
+    </style>
+  </head>
+  <body>
+    <nav role="navigation">
+      <div>
+      <a href="/turbowarp/extensions/">
+        <img src="/favicon.ico" alt="">
+        <span>TurboWarp 扩展库</span>
+      </a>
+      </div>
+    </nav>
+
+    <main class="container">
+      <h1>Key Simulation</h1>
+
+      <noscript><p>Enable JavaScript for blocks to render.</p></noscript>
+
+      <p>This extension allows you to simulate key presses and mouse clicks on the project.</p>
+<h2>Press key</h2>
+<div class="render-scratchblocks">press (space v) for (0.1) seconds (without waiting v) :: #BF0000
+</div><p>This will trigger &quot;key down?&quot; and &quot;when key pressed&quot; blocks. It won't type text into text fields in the editor, for example.</p>
+<p>When <code>0</code> is used as a duration, the key will be pressed for exactly one frame.</p>
+<h2>Click mouse</h2>
+<div class="render-scratchblocks">click (left v) mouse button at x: (0) y: (0) for (0.1) seconds (without waiting v) :: #BF0000
+</div><p>This will trigger &quot;mouse down?&quot; and &quot;when this sprite clicked&quot; blocks as well as update the &quot;mouse x&quot; and &quot;mouse y&quot; blocks. It can't be used to click on buttons in the editor, for example.</p>
+<p>When <code>0</code> is used as a duration, the button will be pressed for exactly one frame.</p>
+<h2>Move mouse</h2>
+<div class="render-scratchblocks">move mouse to x: (0) y: (0) :: #BF0000
+</div><p>This will update the values of the &quot;mouse x&quot; and &quot;mouse y&quot; block without clicking.</p>
+
+
+      <hr>
+
+      <footer>
+        <p>
+          This page is <a href="https://github.com/TurboWarp/extensions/tree/master/docs">open source</a>.
+          
+            Blocks rendered with <a href="https://scratchblocks.github.io/">scratchblocks</a>.
+          
+        </p>
+        <p>TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation.</p>
+      </footer>
+    </main>
+
+    
+      <script src="/turbowarp/extensions/docs-internal/scratchblocks.js"></script>
+      <script>
+        scratchblocks.renderMatching('.render-scratchblocks', {
+          style: 'scratch3'
+        });
+      </script>
+    
+  </body>
+</html>

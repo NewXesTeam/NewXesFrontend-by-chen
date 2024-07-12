@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ShovelUtils - TurboWarp Extension Documentation</title>
+    <link rel="canonical" href="/turbowarp/extensions/TheShovel/ShovelUtils.html">
+    <style>
+      :root {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color-scheme: light dark;
+        font-size: 16px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color: #eee;
+          background: #131313;
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        a {
+          color: #56b2ff;
+        }
+        a:visited {
+          color: #f192ff;
+        }
+        a:active {
+          color: red;
+        }
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        line-height: 1.3;
+      }
+
+      nav {
+        background-color: #ff4c4c;
+        color: white;
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+      nav > div {
+        display: flex;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      nav a {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.5rem 0.25rem 0.5rem 0;
+        align-items: center;
+        text-decoration: none;
+        color: inherit !important;
+      }
+      nav a:hover {
+        text-decoration: underline;
+      }
+      nav img {
+        width: 2rem;
+        height: 2rem;
+        flex-shrink: 0;
+      }
+      @media (prefers-color-scheme: dark) {
+        nav {
+          background-color: #333;
+        }
+      }
+
+      noscript {
+        font-weight: bold;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 0 0.25rem;
+      }
+      h1 {
+        font-size: 2.25rem;
+      }
+      h1, h2, h3, h4, h5, h6 {
+        border-bottom: 1px solid #ccc;
+      }
+      hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 1rem 0;
+      }
+      @media (prefers-color-scheme: dark) {
+        hr, h1, h2, h3, h4, h5, h6 {
+          border-color: #444;
+        }
+      }
+
+      code {
+        background-color: #eee;
+        border-radius: 4px;
+        padding: 0 2px;
+      }
+      pre {
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 4px;
+        overflow-x: auto;
+      }
+      @media (prefers-color-scheme: dark) {
+        code, pre {
+          background-color: #223;
+          border-color: #334;
+        }
+      }
+
+      .render-scratchblocks {
+        width: 100%;
+        overflow-x: auto;
+        white-space: pre;
+        line-height: 42px; /* reasonable estimation to reduce layout shift */
+      }
+      .render-scratchblocks svg {
+        display: block;
+      }
+
+      footer {
+        margin: 1rem 0;
+        font-size: small;
+      }
+    </style>
+  </head>
+  <body>
+    <nav role="navigation">
+      <div>
+      <a href="/turbowarp/extensions/">
+        <img src="/favicon.ico" alt="">
+        <span>TurboWarp 扩展库</span>
+      </a>
+      </div>
+    </nav>
+
+    <main class="container">
+      <h1>ShovelUtils</h1>
+
+      <noscript><p>Enable JavaScript for blocks to render.</p></noscript>
+
+      <p>Shovel Utils is an extension focused mostly on injecting and modifying sprites and assets inside the project, as well as several other functions.</p>
+<p><strong>Disclaimer: Modifying and importing assets can be dangerous, and has the potential to corrupt your project. Be careful!</strong></p>
+<h2>Importing Assets</h2>
+<p>Shovel Utils offers an easy way to import several types of assets, including sprites, costumes, sounds, extensions, and even full projects.</p>
+<hr>
+<p><strong>This goes for all blocks that fetch from a link: If you're experiences errors and are not able to import an asset from a link, check your console! You may be running into a CORS error. To resolve this, use a proxy like <a href="https://corsproxy.io">corsproxy.io</a>.</strong></p>
+<div class="render-scratchblocks">Import sprite from [Link or data uri here]
+</div><p>Imports a sprite into the project using a DataURI or link. Be mindful of sprite names; having two or more sprites with the same name can cause issues.</p>
+<div class="render-scratchblocks">Import image from [https://extensions.turbowarp.org/dango.png] name [Dango]
+</div><p>Imports a costume from a PNG, Bitmap, or JPEG. <strong>Does not work with SVGS</strong>. The costume imports into the current sprite/backdrop the user has selected.</p>
+<div class="render-scratchblocks">Import sound from [https://extensions.turbowarp.org/meow.mp3] name [Meow]
+</div><p>Imports a sound from any Scratch-compatible sound file. The sound imports into the current sprite/backdrop the user has selected.</p>
+<div class="render-scratchblocks">Import project from [https://extensions.turbowarp.org/samples/Box2D.sb3]
+</div><p>Imports a full project from a link. This project will completely replace the contents of the current one. If the project is unsandboxed, it will ask permission before swapping contents.</p>
+<div class="render-scratchblocks">Load extension from [https://extensions.turbowarp.org/utilities.js]
+</div><p>Imports any extension from a link. Extensions from the <a href="https://extensions.turbowarp.org">Extension Gallery</a> can run unsandboxed, and don't require permission to import.</p>
+<h2>Other Ways to Modify The Project</h2>
+<p>Aside from importing assets, Shovel Utils provides multiple miscellaneous features to modify and straight up delete parts of your projects.</p>
+<div class="render-scratchblocks">Set editing target to [Sprite1]
+</div><p>Sets the selected sprite in the editor. You can also set your input to &quot;Stage&quot; to set the selected target to the backdrop. This does work packaged, however will not have a visual effect.</p>
+<div class="render-scratchblocks">(get all sprites ::)
+</div><p>Gets the names of all the sprites (and the stage) as a JSON array. This can then be parsed using the JSON Extension.</p>
+<div class="render-scratchblocks">Restart project
+</div><p>Emulates a green flag click on a project, even if the green flag isn't present.</p>
+<div class="render-scratchblocks">Delete costume [costume1] in [Sprite1]
+</div><p>Deletes a costume from the specified sprite. If the costume doesn't exist, the block simply doesn't do anything.</p>
+<div class="render-scratchblocks">Delete sprite [Sprite1]
+</div><p>Deletes a the specified sprite. If the user has the &quot;Sprite Deletion Confirmation&quot; addon enabled and the project is unpackaged, it will ask permission before deleting sprites.</p>
+<h2>Miscellaneous Features</h2>
+<p>Aside from project modification, there's several utility blocks present in Shovel Utils.</p>
+<div class="render-scratchblocks">(fps::)
+</div><p>Get the accurate FPS, or frames per second, of the current project. This is <em>not</em> the same as the &quot;framerate limit&quot; block from Runtime Options, as the block in Shovel Utils accounts for lag.</p>
+<div class="render-scratchblocks">(Get list [MyList])
+</div><p>Get the values of a list, exported as a JSON array. If the specified list has not been created yet, or is empty, the block will return empty.</p>
+<div class="render-scratchblocks">Set list [MyList] to [⟦1,2⟧]
+</div><p>Sets the values of lists. Accepts JSON arrays as inputs. If the specified list has not been created yet, the block simply doesn't do anything.</p>
+<div class="render-scratchblocks">(Get brightness of [ #ffffff] ::)
+</div><p>Gets the brightness of a hex value. Reports a whole number between 0 and 255. To transfer this to a value between 0 and 100 (what TurboWarp uses), divide the output of the block by 2.55 and round.</p>
+
+
+      <hr>
+
+      <footer>
+        <p>
+          This page is <a href="https://github.com/TurboWarp/extensions/tree/master/docs">open source</a>.
+          
+            Blocks rendered with <a href="https://scratchblocks.github.io/">scratchblocks</a>.
+          
+        </p>
+        <p>TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation.</p>
+      </footer>
+    </main>
+
+    
+      <script src="/turbowarp/extensions/docs-internal/scratchblocks.js"></script>
+      <script>
+        scratchblocks.renderMatching('.render-scratchblocks', {
+          style: 'scratch3'
+        });
+      </script>
+    
+  </body>
+</html>

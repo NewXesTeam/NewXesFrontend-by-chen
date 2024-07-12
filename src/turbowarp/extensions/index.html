@@ -1,0 +1,2761 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>学而思编程 - 受益一生的能力</title>
+    <meta name="theme-color" content="#ff4c4c">
+    <meta name="description" content="学而思编程 - 受益一生的能力">
+    <style>
+      :root {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color-scheme: light dark;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color: #eee;
+          background: #111;
+        }
+        a {
+          color: #56b2ff;
+        }
+        a:visited {
+          color: #f192ff;
+        }
+        a:active {
+          color: red;
+        }
+        .invert-dark {
+          filter: invert(100%);
+        }
+      }
+
+      h1 {
+        margin: 16px 0;
+      }
+      h2, h3, p {
+        margin: 8px 0;
+      }
+
+      .section {
+        max-width: 928px;
+        margin: 24px auto;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: normal;
+        text-align: center;
+      }
+      .header svg {
+        width: 56px;
+        height: 56px;
+        flex-shrink: 0;
+        margin: 0 8px 0 0;
+      }
+      @media (max-width: 750px) {
+        .header h1 {
+          flex-direction: column;
+        }
+        .header svg {
+          margin: 0 0 8px 0;
+        }
+      }
+
+      .infobox, .development-tools {
+        padding: 8px;
+        margin: 8px 0;
+        border-radius: 8px;
+        background: rgba(0, 195, 255, 0.245);
+        border: 1px solid rgba(0, 187, 255, 0.604);
+      }
+      .infobox-warning {
+        background-color: rgba(255, 0, 0, 0.245);
+        border-color: rgba(255, 0, 0, 0.446);
+      }
+      .infobox-title {
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+
+      .development-tools {
+        background-color: rgba(200, 0, 255, 0.245);
+        border-color: rgba(234, 0, 255, 0.604);
+      }
+      .development-tools h2 {
+        font-size: 1em;
+      }
+
+      .extensions {
+        display: -ms-grid;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin: 16px -4px;
+      }
+      @media (max-width: 944px) {
+        .extensions {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 650px) {
+        .extensions {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .extension {
+        position: relative;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        margin: 4px;
+        overflow: hidden;
+        padding: 8px;
+      }
+      @media (prefers-color-scheme: dark) {
+        .extension {
+          border-color: #333;
+        }
+      }
+      .extension h3 {
+        font-size: 1.5em;
+      }
+      .extension > :last-child {
+        margin-bottom: 0;
+      }
+      .extension-banner {
+        position: relative;
+        margin: -8px -8px 0 -8px;
+      }
+      .extension-image {
+        display: block;
+        width: 100%;
+        /* TODO: see if there's another way to do this that works in older browsers too */
+        aspect-ratio: 2 / 1;
+      }
+
+      .extension-buttons {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        gap: 0.5rem;
+        opacity: 0;
+        transition: opacity .15s;
+        background: rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+      }
+      .extension:hover .extension-buttons, .extension:focus-within .extension-buttons {
+        opacity: 1;
+        backdrop-filter: blur(0.6px);
+      }
+      .extension-buttons > * {
+        padding: 0.5rem;
+        background-color: #4c97ff;
+        border-radius: 0.5rem;
+        border: none;
+        font: inherit;
+        cursor: pointer;
+        color: white;
+        text-decoration: none;
+        pointer-events: auto;
+        transition: filter 0.15s;
+        filter: drop-shadow(0px 1px 3px #00000075);
+      }
+      .extension-buttons > *:hover {
+        filter: drop-shadow(0px 1px 7px black);
+        z-index: 1;
+      }
+      .extension-buttons *:active {
+        filter: brightness(0.85) drop-shadow(0px 1px 2px #00000075);
+      }
+      .extension-buttons *:disabled {
+        opacity: 0.5;
+      }
+      .extension-buttons .open {
+        background-color: #ff4c4c;
+        color: white;
+      }
+      .extension-buttons .docs {
+        background-color: #FFAB19;
+        color: white;
+      }
+      .extension-buttons .sample {
+        background-color: #40BF4A;
+        color: white;
+      }
+      .extension-buttons :disabled {
+        opacity: 0.5;
+      }
+
+      .sample-list {
+        display: none;
+        position: absolute;
+        left: 0.5rem;
+        right: 0.5rem;
+        width: calc(100% - 1rem);
+        margin-top: -1.5rem;
+        padding: 0.5rem;
+        box-sizing: border-box;
+        background-color: white;
+        border-radius: 0.5rem;
+        box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, .3);
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .sample-list h3 {
+        font-size: 1rem;
+        margin: 0;
+      }
+      .extension:hover[data-samples-open="true"] .sample-list {
+        display: flex;
+      }
+      @media (prefers-color-scheme: dark) {
+        .sample-list {
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          background-color: #333;
+        }
+      }
+
+      footer {
+        opacity: 0.8;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 16px;
+      }
+      footer p {
+        margin: 0 0 8px 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="section header">
+      <h1>
+        <img src="/favicon.ico" alt="favicon"/>
+        &nbsp;&nbsp;
+        <div>TurboWarp 扩展库</div>
+      </h1>
+
+      <p>不像在其他网站上的第三方扩展，这些扩展不被限制在扩展沙盒，所有这些会更加快。这些扩展都已反复确定是安全的。</p>
+      <p>
+        要在 TurboWarp 中使用多个扩展时, 在扩展上浮动鼠标并点击“复制 URL”以复制这个扩展的 URL。之后前往编辑器，打开扩展选择器，选择中间的“自定义扩展”选项，并输入刚刚复制的 URL。
+      </p>
+
+      <div class="infobox infobox-warning">
+        <div class="infobox-title">这些扩展不被 原生Scratch 支持。</div>
+        当项目使用了这些扩展时，将无法上传到使用了 原生Scratch 的网站。
+        但是可以在 <a href="https://packager.turbowarp.org/">TurboWarp打包器</a> 中使用。
+      </div>
+
+      <div class="infobox">
+        <div class="infobox-title">有些扩展不在 TurboWarp桌面版 工作。</div>
+        为了集成性，安全性，和离线支持，<a href="https://desktop.turbowarp.org/">TurboWarp桌面版</a> 在每次到更新日期时，会附加一份离线拷贝，所以有些扩展会找不到或老了。
+        请使用最新更新以获得最好的内容支持性。
+      </div>
+    </div>
+
+    
+
+    <script>
+      document.addEventListener('click', function (e) {
+        var toCopy = e.target.getAttribute('data-copy');
+        if (toCopy) {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(toCopy);
+          } else {
+            var input = document.createElement('input');
+            input.value = toCopy;
+            input.style.top = '0';
+            input.style.left = '0';
+            input.style.position = 'fixed';
+            document.body.appendChild(input);
+            input.focus();
+            input.select();
+            try {
+              document.execCommand('copy');
+            } catch (e) {
+              console.error(e);
+            }
+            document.body.removeChild(input);
+            e.target.focus();
+          }
+        }
+
+        if (e.target.className.includes('sample-list-button')) {
+          var extension = e.target.closest('.extension');
+          extension.dataset.samplesOpen = extension.dataset.samplesOpen !== 'true';
+        }
+      });
+    </script>
+
+    <div class="section extensions-outer">
+      <div class="extensions">
+        
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/lab/text.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/lab/text.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/lab/text.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Animated Text</h2>
+            <p>
+              An easy way to display and animate text. Compatible with Scratch Lab&#39;s Animated Text experiment.
+              Created by LilyMakesThings.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/stretch.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/stretch.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/stretch.js">打开扩展</a>
+
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FStretch.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Stretch</h2>
+            <p>
+              Stretch sprites horizontally or vertically.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/gamepad.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/gamepad.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/gamepad.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Gamepad</h2>
+            <p>
+              Directly access gamepads instead of just mapping buttons to keys.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/box2d.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/box2d.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/box2d.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/box2d.html">扩展文档</a>
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FBox2D.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Box2D Physics</h2>
+            <p>
+              Two dimensional physics.
+              
+              Originally created by <a href="https://scratch.mit.edu/users/griffpatch/">griffpatch</a>.
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/files.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/files.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/files.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Files</h2>
+            <p>
+              Read and download files.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/pointerlock.png" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/pointerlock.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/pointerlock.js">打开扩展</a>
+
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FMoving%20Around%20with%20Pointer%20Lock.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Pointerlock</h2>
+            <p>
+              Adds blocks for mouse locking. Mouse x &amp; y blocks will report the change since the previous frame while the pointer is locked. Replaces the pointerlock experiment.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/cursor.png" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/cursor.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/cursor.js">打开扩展</a>
+
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FTickle%20Me.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Mouse Cursor</h2>
+            <p>
+              Use custom cursors or hide the cursor. Also allows replacing the cursor with any costume image.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/runtime-options.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/runtime-options.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/runtime-options.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Runtime Options</h2>
+            <p>
+              Get and modify turbo mode, framerate, interpolation, clone limit, stage size, and more.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/fetch.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/fetch.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/fetch.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Fetch</h2>
+            <p>
+              Make requests to the broader internet.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/text.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/text.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/text.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Text</h2>
+            <p>
+              Manipulate characters and text.
+              
+              Originally created by <a href="https://scratch.mit.edu/users/CST1229/">CST1229</a>.
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/local-storage.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/local-storage.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/local-storage.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/local-storage.html">扩展文档</a>
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Local Storage</h2>
+            <p>
+              Store data persistently. Like cookies, but better.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/true-fantom/base.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/true-fantom/base.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/true-fantom/base.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Base</h2>
+            <p>
+              Convert numbers between bases.
+              Created by <a href="https://scratch.mit.edu/users/TrueFantom/">TrueFantom</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/bitwise.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/bitwise.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/bitwise.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/bitwise.html">扩展文档</a>
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Bitwise</h2>
+            <p>
+              Blocks that operate on the binary representation of numbers in computers.
+              Created by <a href="https://scratch.mit.edu/users/TrueFantom/">TrueFantom</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Skyhigh173/bigint.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Skyhigh173/bigint.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Skyhigh173/bigint.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>BigInt</h2>
+            <p>
+              Math blocks that work on infinitely large integers (no decimals).
+              Created by Skyhigh173.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/utilities.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/utilities.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/utilities.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Utilities</h2>
+            <p>
+              A bunch of interesting blocks.
+              
+              Originally created by <a href="https://scratch.mit.edu/users/Sheep_maker/">Sheep_maker</a>.
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/sound.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/sound.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/sound.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Sound</h2>
+            <p>
+              Play sounds from URLs.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/Video.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/Video.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/Video.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Video</h2>
+            <p>
+              Play videos from URLs.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/iframe.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/iframe.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/iframe.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Iframe</h2>
+            <p>
+              Display webpages or HTML over the stage.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/unknown.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Clay/htmlEncode.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Clay/htmlEncode.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>HTML Encode</h2>
+            <p>
+              Escape untrusted text to safely include in HTML.
+              Created by ClaytonTDM.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Xeltalliv/clippingblending.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Xeltalliv/clippingblending.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Xeltalliv/clippingblending.js">打开扩展</a>
+
+                
+
+                
+                  <button class="sample sample-list-button">示例作品s</button>
+                
+              </div>
+            </div>
+
+            
+              <div class="sample-list">
+                <h3>Clipping &amp; Blending 示例作品s:</h3>
+                
+                  <a class="sample-list-item" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FAdditive%20Fire.sb3">Additive Fire</a>
+                
+                  <a class="sample-list-item" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FClipping%20Sprites%20and%20Pen.sb3">Clipping Sprites and Pen</a>
+                
+              </div>
+            
+      
+            <h2>Clipping &amp; Blending</h2>
+            <p>
+              Clipping outside of a specified rectangular area and different color blending modes.
+              Created by <a href="https://scratch.mit.edu/users/Vadik1/">Vadik1</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/clipboard.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/clipboard.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/clipboard.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Clipboard</h2>
+            <p>
+              Read and write from the system clipboard.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/obviousAlexC/penPlus.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/obviousAlexC/penPlus.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/obviousAlexC/penPlus.js">打开扩展</a>
+
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FPen%20Plus.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Pen Plus V7</h2>
+            <p>
+              Advanced rendering capabilities.
+              Created by <a href="https://scratch.mit.edu/users/pinksheep2917/">ObviousAlexC</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/penplus.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/penplus.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/penplus.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Pen Plus V5 (Old)</h2>
+            <p>
+              Replaced by Pen Plus V6.
+              Created by <a href="https://scratch.mit.edu/users/pinksheep2917/">ObviousAlexC</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Xeltalliv/simple3D.png" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Xeltalliv/simple3D.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Xeltalliv/simple3D.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/Xeltalliv/simple3D.html">扩展文档</a>
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FSimple3D%20template.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Simple 3D</h2>
+            <p>
+              Make GPU accelerated 3D projects easily.
+              Created by <a href="https://scratch.mit.edu/users/Vadik1/">Vadik1</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/Skins.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/Skins.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/Skins.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/Lily/Skins.html">扩展文档</a>
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Skins</h2>
+            <p>
+              Have your sprites render as other images or costumes.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/obviousAlexC/SensingPlus.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/obviousAlexC/SensingPlus.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/obviousAlexC/SensingPlus.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Sensing Plus</h2>
+            <p>
+              An extension to the sensing category.
+              Created by <a href="https://scratch.mit.edu/users/pinksheep2917/">ObviousAlexC</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/CubesterYT/KeySimulation.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/CubesterYT/KeySimulation.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/CubesterYT/KeySimulation.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/CubesterYT/KeySimulation.html">扩展文档</a>
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Key Simulation</h2>
+            <p>
+              Simulate key presses and mouse clicks.
+              Created by <a href="https://scratch.mit.edu/users/CubesterYT/">CubesterYT</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/ClonesPlus.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/ClonesPlus.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/ClonesPlus.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Clones Plus</h2>
+            <p>
+              Expansion of Scratch&#39;s clone features.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/LooksPlus.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/LooksPlus.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/LooksPlus.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Looks Plus</h2>
+            <p>
+              Expands upon the looks category, allowing you to show/hide, get costume data and edit SVG skins on sprites.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/MoreEvents.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/MoreEvents.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/MoreEvents.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>More Events</h2>
+            <p>
+              Start your scripts in new ways.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/ListTools.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/ListTools.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/ListTools.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>List Tools</h2>
+            <p>
+              An assortment of new ways to interact with lists.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/veggiecan/mobilekeyboard.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/veggiecan/mobilekeyboard.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/veggiecan/mobilekeyboard.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Mobile Keyboard</h2>
+            <p>
+              Show the keyboard on mobile devices and get the users input without showing any input modal.
+              Created by veggiecan0419.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/NexusKitten/moremotion.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/NexusKitten/moremotion.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/NexusKitten/moremotion.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>More Motion</h2>
+            <p>
+              More motion-related blocks.
+              Created by <a href="https://scratch.mit.edu/users/NamelessCat/">NamelessCat</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/CubesterYT/WindowControls.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/CubesterYT/WindowControls.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/CubesterYT/WindowControls.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/CubesterYT/WindowControls.html">扩展文档</a>
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Window Controls</h2>
+            <p>
+              Move, resize, rename the window, enter fullscreen, get screen size, and more.
+              Created by <a href="https://scratch.mit.edu/users/CubesterYT/">CubesterYT</a>.
+              Originally created by BlueDome77.
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/veggiecan/browserfullscreen.png" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/veggiecan/browserfullscreen.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/veggiecan/browserfullscreen.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Browser Fullscreen</h2>
+            <p>
+              Enter and exit fullscreen mode.
+              Created by Veggiecan0419.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/shreder95ua/resolution.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/shreder95ua/resolution.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/shreder95ua/resolution.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Screen Resolution</h2>
+            <p>
+              Get the resolution of the primary screen.
+              Created by <a href="https://scratch.mit.edu/users/shreder95ua/">shreder95ua</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/XmerOriginals/closecontrol.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/XmerOriginals/closecontrol.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/XmerOriginals/closecontrol.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Ask Before Closing Tab</h2>
+            <p>
+              Show a prompt when someone tries to close the tab.
+              Created by XmerOriginals.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/navigator.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/navigator.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/navigator.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Navigator</h2>
+            <p>
+              Details about the user&#39;s browser and operating system.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/battery.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/battery.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/battery.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Battery</h2>
+            <p>
+              Access information about the battery of phones or laptops. May not work on all devices and browsers.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/TheShovel/CustomStyles.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/TheShovel/CustomStyles.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/TheShovel/CustomStyles.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Custom Styles</h2>
+            <p>
+              Customize the appearance of variable monitors and prompts in your project.
+              Created by TheShovel.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/TheShovel/ColorPicker.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/TheShovel/ColorPicker.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/TheShovel/ColorPicker.js">打开扩展</a>
+
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FRecolor%20the%20Dango.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Color Picker</h2>
+            <p>
+              Access your system&#39;s color picker.
+              Created by TheShovel.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/NexusKitten/controlcontrols.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/NexusKitten/controlcontrols.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/NexusKitten/controlcontrols.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Control Controls</h2>
+            <p>
+              Show and hide the project&#39;s controls.
+              Created by <a href="https://scratch.mit.edu/users/NexusKitten/">NamelessCat</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/mdwalters/notifications.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/mdwalters/notifications.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/mdwalters/notifications.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Notifications</h2>
+            <p>
+              Display notifications.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/XeroName/Deltatime.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/XeroName/Deltatime.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/XeroName/Deltatime.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Deltatime</h2>
+            <p>
+              Precise delta timing blocks.
+              Created by <a href="https://scratch.mit.edu/users/plant2014/">XeroName</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/ar.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/ar.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/ar.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/ar.html">扩展文档</a>
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FAR%20cube.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Augmented Reality</h2>
+            <p>
+              Shows image from camera and performs motion tracking, allowing 3D projects to correctly overlay virtual objects on real world.
+              Created by <a href="https://scratch.mit.edu/users/Vadik1/">Vadik1</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/encoding.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/encoding.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/encoding.js">打开扩展</a>
+
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FBase%2064.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Encoding</h2>
+            <p>
+              Encode and decode strings into their unicode numbers, base 64, or URLs.
+              Created by -SIPC-.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/SoundExpanded.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/SoundExpanded.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/SoundExpanded.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Sound Expanded</h2>
+            <p>
+              Adds more sound-related blocks.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/TempVariables2.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/TempVariables2.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/TempVariables2.js">打开扩展</a>
+
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FTemporary%20Variables%20-%20Thread%20vs.%20Runtime.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Temporary Variables</h2>
+            <p>
+              Create disposable runtime or thread variables.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/MoreTimers.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/MoreTimers.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/MoreTimers.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>More Timers</h2>
+            <p>
+              Control several timers at once.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/clouddata-ping.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/clouddata-ping.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/clouddata-ping.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Ping Cloud Data</h2>
+            <p>
+              Determine whether a cloud variable server is probably up.
+              
+              Originally created by TheShovel.
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/cloudlink.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/cloudlink.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/cloudlink.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Cloudlink</h2>
+            <p>
+              A powerful WebSocket extension for Scratch.
+              Created by MikeDEV.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/true-fantom/network.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/true-fantom/network.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/true-fantom/network.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Network</h2>
+            <p>
+              Various blocks for interacting with the network.
+              Created by <a href="https://scratch.mit.edu/users/TrueFantom/">TrueFantom</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/true-fantom/math.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/true-fantom/math.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/true-fantom/math.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Math</h2>
+            <p>
+              A lot of operators blocks, from exponentiation to trigonometric functions.
+              Created by <a href="https://scratch.mit.edu/users/TrueFantom/">TrueFantom</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/true-fantom/regexp.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/true-fantom/regexp.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/true-fantom/regexp.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>RegExp</h2>
+            <p>
+              Full interface for working with Regular Expressions.
+              Created by <a href="https://scratch.mit.edu/users/TrueFantom/">TrueFantom</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/true-fantom/couplers.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/true-fantom/couplers.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/true-fantom/couplers.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Couplers</h2>
+            <p>
+              A few adapter blocks.
+              Created by <a href="https://scratch.mit.edu/users/TrueFantom/">TrueFantom</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/AllMenus.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/AllMenus.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/AllMenus.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>All Menus</h2>
+            <p>
+              Special category with every menu from every Scratch category and extensions.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/HackedBlocks.png" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/HackedBlocks.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/HackedBlocks.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Hidden Block Collection</h2>
+            <p>
+              Various &#34;hacked blocks&#34; that work in Scratch but are not visible in the palette.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a> and pumpkinhasapatch.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/Cast.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/Cast.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/Cast.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Cast</h2>
+            <p>
+              Convert values between types.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/-SIPC-/time.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/-SIPC-/time.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/-SIPC-/time.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Time</h2>
+            <p>
+              Blocks for times, dates, and time zones.
+              Created by -SIPC- and <a href="https://scratch.mit.edu/users/DemonX5/">SharkPool</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/-SIPC-/consoles.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/-SIPC-/consoles.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/-SIPC-/consoles.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Consoles</h2>
+            <p>
+              Blocks that interact with the JavaScript console built in to your browser&#39;s developer tools.
+              Created by -SIPC-.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/ZXMushroom63/searchApi.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/ZXMushroom63/searchApi.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/ZXMushroom63/searchApi.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Search Params</h2>
+            <p>
+              Interact with URL search parameters: the part of the URL after a question mark.
+              Created by ZXMushroom63.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/TheShovel/ShovelUtils.png" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/TheShovel/ShovelUtils.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/TheShovel/ShovelUtils.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/TheShovel/ShovelUtils.html">扩展文档</a>
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>ShovelUtils</h2>
+            <p>
+              A bunch of miscellaneous blocks.
+              Created by TheShovel.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/Assets.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/Assets.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/Assets.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Asset Manager</h2>
+            <p>
+              Add, remove, and get data from various types of assets.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/SharkPool/Font-Manager.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/SharkPool/Font-Manager.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/SharkPool/Font-Manager.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Font Manager</h2>
+            <p>
+              Add, delete, and manage fonts.
+              Created by SharkPool and <a href="https://scratch.mit.edu/users/0znzw/">Ashimee</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/DNin/wake-lock.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/DNin/wake-lock.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/DNin/wake-lock.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/DNin/wake-lock.html">扩展文档</a>
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Wake Lock</h2>
+            <p>
+              Prevent the computer from falling asleep.
+              Created by <a href="https://scratch.mit.edu/users/D-ScratchNinja/">D-ScratchNinja</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Skyhigh173/json.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Skyhigh173/json.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Skyhigh173/json.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>JSON</h2>
+            <p>
+              Handle JSON strings and arrays.
+              Created by Skyhigh173.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/mbw/xml.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/mbw/xml.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/mbw/xml.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>XML</h2>
+            <p>
+              Create and extract values from XML.
+              Created by <a href="https://scratch.mit.edu/users/mybearworld/">mybearworld</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/numerical-encoding-2.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/numerical-encoding-2.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/numerical-encoding-2.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Numerical Encoding V2</h2>
+            <p>
+              Encode strings as numbers for cloud variables. Not compatible with V1 due to using much more efficient format.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/unknown.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/cs2627883/numericalencoding.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/cs2627883/numericalencoding.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Numerical Encoding V1</h2>
+            <p>
+              Use V2 instead as it is more efficient. V1 only exists for compatibility reasons.
+              Created by <a href="https://scratch.mit.edu/users/cs2627883/">cs2627883</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/DT/cameracontrols.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/DT/cameracontrols.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/DT/cameracontrols.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Camera Controls (Very Buggy)</h2>
+            <p>
+              Move the visible part of the stage.
+              Created by DT.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/TheShovel/CanvasEffects.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/TheShovel/CanvasEffects.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/TheShovel/CanvasEffects.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Canvas Effects</h2>
+            <p>
+              Apply visual effects to the entire stage.
+              Created by TheShovel and <a href="https://scratch.mit.edu/users/DemonX5/">SharkPool</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Longboost/color_channels.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Longboost/color_channels.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Longboost/color_channels.js">打开扩展</a>
+
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FParty%20Time.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>RGB Channels</h2>
+            <p>
+              Only render or stamp certain RGB channels.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/CST1229/zip.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/CST1229/zip.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/CST1229/zip.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/CST1229/zip.html">扩展文档</a>
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Zip</h2>
+            <p>
+              Create and edit .zip format files, including .sb3 files.
+              Created by <a href="https://scratch.mit.edu/users/CST1229/">CST1229</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/unknown.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/CST1229/images.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/CST1229/images.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Images</h2>
+            <p>
+              Some blocks for working with images.
+              
+              Originally created by <a href="https://scratch.mit.edu/users/CST1229/">CST1229</a>.
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/TheShovel/LZ-String.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/TheShovel/LZ-String.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/TheShovel/LZ-String.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>LZ Compress</h2>
+            <p>
+              Compress and decompress text using lz-string.
+              
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/0832/rxFS2.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/0832/rxFS2.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/0832/rxFS2.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>rxFS</h2>
+            <p>
+              Blocks for interacting with a virtual in-memory filesystem.
+              Created by 0832.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/NexusKitten/sgrab.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/NexusKitten/sgrab.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/NexusKitten/sgrab.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>S-Grab</h2>
+            <p>
+              Get information about Scratch projects and Scratch users.
+              Created by <a href="https://scratch.mit.edu/users/NamelessCat/">NamelessCat</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/NOname-awa/graphics2d.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/NOname-awa/graphics2d.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/NOname-awa/graphics2d.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Graphics 2D</h2>
+            <p>
+              Blocks to compute lengths, angles, and areas in two dimensions.
+              Created by NOname-awa.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/NOname-awa/more-comparisons.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/NOname-awa/more-comparisons.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/NOname-awa/more-comparisons.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>More Comparisons</h2>
+            <p>
+              More comparison blocks.
+              Created by NOname-awa.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/JeremyGamer13/tween.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/JeremyGamer13/tween.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/JeremyGamer13/tween.js">打开扩展</a>
+
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FTweening.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Tween</h2>
+            <p>
+              Easing methods for smooth animations.
+              Created by <a href="https://scratch.mit.edu/users/JeremyGamer13/">JeremyGamer13</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/rixxyx.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/rixxyx.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/rixxyx.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>RixxyX</h2>
+            <p>
+              Various utility blocks.
+              Created by <a href="https://scratch.mit.edu/users/RixTheTyrunt/">RixTheTyrunt</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/lmsutils.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/lmsutils.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/lmsutils.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Lily&#39;s Toolbox</h2>
+            <p>
+              Previously called LMS Utilities.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/qxsck/data-analysis.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/qxsck/data-analysis.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/qxsck/data-analysis.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Data Analysis</h2>
+            <p>
+              Blocks to compute means, medians, maximums, minimums, variances, and modes.
+              Created by qxsck.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/qxsck/var-and-list.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/qxsck/var-and-list.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/qxsck/var-and-list.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Variable and list</h2>
+            <p>
+              More blocks related to variables and lists.
+              Created by qxsck.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/vercte/dictionaries.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/vercte/dictionaries.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/vercte/dictionaries.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Dictionaries</h2>
+            <p>
+              Use the power of dictionaries in your project.
+              Created by <a href="https://scratch.mit.edu/users/lolecksdeehaha/">Vercte</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/godslayerakp/http.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/godslayerakp/http.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/godslayerakp/http.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>HTTP</h2>
+            <p>
+              Comprehensive extension for interacting with external websites.
+              Created by <a href="https://scratch.mit.edu/users/RedMan13/">RedMan13</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/godslayerakp/ws.png" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/godslayerakp/ws.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/godslayerakp/ws.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/godslayerakp/ws.html">扩展文档</a>
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FCloud%20Variables.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>WebSocket</h2>
+            <p>
+              Manually connect to WebSocket servers.
+              Created by <a href="https://scratch.mit.edu/users/RedMan13/">RedMan13</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/CommentBlocks.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/CommentBlocks.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/CommentBlocks.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Comment Blocks</h2>
+            <p>
+              Annotate your scripts.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/veggiecan/LongmanDictionary.png" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/veggiecan/LongmanDictionary.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/veggiecan/LongmanDictionary.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Longman Dictionary</h2>
+            <p>
+              Get the definitions of words from the Longman Dictionary in your projects.
+              Created by veggiecan0419.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/CubesterYT/TurboHook.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/CubesterYT/TurboHook.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/CubesterYT/TurboHook.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/CubesterYT/TurboHook.html">扩展文档</a>
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>TurboHook</h2>
+            <p>
+              Allows you to use webhooks.
+              Created by <a href="https://scratch.mit.edu/users/CubesterYT/">CubesterYT</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Alestore/nfcwarp.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Alestore/nfcwarp.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Alestore/nfcwarp.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>NFCWarp</h2>
+            <p>
+              Allows reading data from NFC (NDEF) devices. Only works in Chrome on Android.
+              Created by <a href="https://scratch.mit.edu/users/aleb2005/">Alestore Games</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/itchio.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/itchio.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/itchio.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>itch.io</h2>
+            <p>
+              Blocks that interact with the itch.io website. Unofficial.
+              Created by <a href="https://scratch.mit.edu/users/softed/">softed</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/gamejolt.png" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/gamejolt.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/gamejolt.js">打开扩展</a>
+
+                
+                  <a class="docs" href="http://127.0.0.1:8080/turbowarp/extensions/gamejolt.html">扩展文档</a>
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Game Jolt</h2>
+            <p>
+              Blocks that allow games to interact with the GameJolt API. Unofficial.
+              Created by <a href="https://scratch.mit.edu/users/softed/">softed</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/obviousAlexC/newgroundsIO.svg" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/obviousAlexC/newgroundsIO.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/obviousAlexC/newgroundsIO.js">打开扩展</a>
+
+                
+
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>Newgrounds</h2>
+            <p>
+              Blocks that allow games to interact with the Newgrounds API. Unofficial.
+              Created by <a href="https://scratch.mit.edu/users/pinksheep2917/">ObviousAlexC</a>.
+              
+            </p>
+          </div>
+        
+          <div class="extension">
+            <div class="extension-banner">
+              
+              <img loading="lazy" src="images/Lily/McUtils.png" class="extension-image">
+
+              <div class="extension-buttons">
+                <button class="copy" data-copy="http://127.0.0.1:8080/turbowarp/extensions/Lily/McUtils.js">复制 URL</button>
+                <a class="open" href="http://127.0.0.1:8080/turbowarp/editor.html?extension=http://127.0.0.1:8080/turbowarp/extensions/Lily/McUtils.js">打开扩展</a>
+
+                
+
+                
+                  <a class="sample" href="http://127.0.0.1:8080/turbowarp/editor.html?project_url=http://127.0.0.1:8080/turbowarp/extensions/samples%2FAsk%20for%20the%20manager.sb3">示例作品</a>
+                
+              </div>
+            </div>
+
+            
+      
+            <h2>McUtils</h2>
+            <p>
+              Helpful utilities for any fast food employee.
+              Created by <a href="https://scratch.mit.edu/users/LilyMakesThings/">LilyMakesThings</a>.
+              
+            </p>
+          </div>
+        
+      </div>
+    </div>
+
+    <footer class="section">
+      <p>TurboWarp is not affiliated with Scratch, the Scratch Team, or the Scratch Foundation.</p>
+      <div class="links">
+        <a href="https://github.com/TurboWarp/extensions/tree/master/images#readme">Image Attribution</a>
+        -
+        <a href="https://github.com/TurboWarp/extensions">GitHub</a>
+        -
+        <a href="https://docs.turbowarp.org/development/extensions/introduction">Developer 扩展文档</a>
+      </div>
+    </footer>
+  </body>
+</html>
