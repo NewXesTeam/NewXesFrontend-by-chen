@@ -1,4 +1,5 @@
 window.discover_page = 1;
+window.discover_lang = "all";
 window.discover_type = "latest";
 window.discover_shown = false;
 
@@ -32,14 +33,12 @@ const show_discover_nav = () => {
 const set_discover_page = page => {
     _set_discover_page(page);
     update_discover_nav();
-    if (window.discover_type === "latest") {
-        project_discover_latest("project-discover", window.discover_page, 50);
-    }
+    let lang = window.discover_lang === "all" ? "" : window.discover_lang;
+    project_discover_common("project-discover", window.discover_type, lang, window.discover_page, 50);
 }
 
 const nav_set_discover_page = (id) => {
-    if (event.keyCode == 13)
-    {
+    if (event.keyCode == 13) {
         let num = document.getElementById(`${id}-page-num`);
         set_discover_page(Number(num.value));
     }
@@ -51,4 +50,26 @@ const discover_page_prev = () => {
 
 const discover_page_next = () => {
     set_discover_page(window.discover_page + 1);
+}
+
+const discover_lang_changed = () => {
+    let lang_radios = document.getElementsByName("discover-lang");
+    lang_radios.forEach(radio => {
+        if (radio.checked) {
+            window.discover_lang = radio.value;
+            set_discover_page(1);
+            return;
+        }
+    })
+}
+
+const discover_category_changed = () => {
+    let category_radios = document.getElementsByName("discover-category");
+    category_radios.forEach(radio => {
+        if (radio.checked) {
+            window.discover_type = radio.value;
+            set_discover_page(1);
+            return;
+        }
+    })
 }

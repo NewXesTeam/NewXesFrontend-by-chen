@@ -1,3 +1,11 @@
 .top-padding {
     padding-top: 15px;
 }
+
+.left-padding {
+    padding-left: 15px;
+}
+
+.right-padding {
+    padding-right: 15px;
+}

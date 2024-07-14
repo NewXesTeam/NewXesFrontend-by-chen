@@ -7,9 +7,8 @@
     <title>学而思编程 - 受益一生的能力</title>
 
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/index.css" rel="stylesheet">
     <link href="/static/css/base.css" rel="stylesheet">
-    <link href="/discover/discover.css" rel="stylesheet">
-    <script src="/static/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -29,10 +28,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">主页</a>
+                        <a class="nav-link active" aria-current="page" href="/">主页</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/discover">发现</a>
+                        <a class="nav-link" href="/discover">发现</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">codeUP</a>
@@ -108,82 +107,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- Category -->
-    <div class="d-flex justify-content-between">
-        <div class="left-padding top-padding">
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="discover-lang" id="discover-lang-a"value="all" autocomplete="off" onchange="discover_lang_changed()" checked>
-                <label class="btn btn-outline-primary" for="discover-lang-a">所有</label>
-
-                <input type="radio" class="btn-check" name="discover-lang" id="discover-lang-b"value="scratch" autocomplete="off" onchange="discover_lang_changed()">
-                <label class="btn btn-outline-primary" for="discover-lang-b">TurboWarp</label>
-
-                <input type="radio" class="btn-check" name="discover-lang" id="discover-lang-c"value="python" autocomplete="off" onchange="discover_lang_changed()">
-                <label class="btn btn-outline-primary" for="discover-lang-c">Python</label>
-
-                <input type="radio" class="btn-check" name="discover-lang" id="discover-lang-d"value="cpp" autocomplete="off" onchange="discover_lang_changed()">
-                <label class="btn btn-outline-primary" for="discover-lang-d">C++</label>
-            </div>
-        </div>
-        <div id="front-page-nav" style="display:none">
-            <ul class="pagination top-padding">
-                <li class="page-item disabled" id="front-page-prev">
-                    <a class="page-link" href="#" onclick="discover_page_prev()">上一页</a>
-                </li>
-                <li class="page-item mb-3">
-                    <div class="input-group">
-                        <span class="input-group-text" style="border-radius: 0px;">页码</span>
-                        <input type="number" min="1" max="200" class="form-control" id="front-page-num"
-                            placeholder="输入页码..." style="border-radius: 0px;"
-                            onkeydown="nav_set_discover_page('front')">
-                    </div>
-                </li>
-                <li class="page-item" id="front-page-next">
-                    <a class="page-link" href="#" onclick="discover_page_next()">下一页</a>
-                </li>
-            </ul>
-        </div>
-        <div class="right-padding top-padding">
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="discover-category" id="discover-category-a" value="latest" autocomplete="off" onchange="discover_category_changed()" checked>
-                <label class="btn btn-outline-primary" for="discover-category-a">最新发布</label>
-
-                <input type="radio" class="btn-check" name="discover-category" id="discover-category-b" value="popular" autocomplete="off" onchange="discover_category_changed()">
-                <label class="btn btn-outline-primary" for="discover-category-b">最受欢迎</label>
-            </div>
-        </div>
-    </div>
-
-    <div class="row row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-4"
-        id="project-discover"></div>
-
-    <div id="end-page-nav" style="display:none">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled" id="end-page-prev">
-                <a class="page-link" href="#" onclick="discover_page_prev()">上一页</a>
-            </li>
-            <li class="page-item mb-3">
-                <div class="input-group">
-                    <span class="input-group-text" style="border-radius: 0px;">页码</span>
-                    <input type="number" min="1" max="200" class="form-control" id="end-page-num" placeholder="输入页码..."
-                        style="border-radius: 0px;" onkeydown="nav_set_discover_page('end')">
-                </div>
-            </li>
-            <li class="page-item" id="end-page-next">
-                <a class="page-link" href="#" onclick="discover_page_next()">下一页</a>
-            </li>
-        </ul>
-    </div>
-
-    <script src="/static/js/messages.js"></script>
-    <script src="/static/js/project.js"></script>
-    <script src="/discover/discover.js"></script>
-    <script>
-        update_discover_nav();
-        project_discover_common("project-discover", "latest", "", window.discover_page, 50)
-            .then(() => { show_discover_nav(); })
-    </script>
 </body>
 
 </html>

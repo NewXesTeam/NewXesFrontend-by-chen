@@ -43,8 +43,8 @@ const project_follows = async box_id => {
         })
 }
 
-const project_discover_latest = async (box_id, page, per_page) => {
-    return project_common(`/api/works/latest?page=${page}&per_page=${per_page}`)
+const project_discover_common = async (box_id, type, lang, page, per_page) => {
+    return project_common(`/api/works/${type}?lang=${lang}&page=${page}&per_page=${per_page}`)
         .then((data) => {
             let box = document.getElementById(box_id)
             box.innerHTML = project_html(data)

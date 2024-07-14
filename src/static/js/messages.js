@@ -1,18 +1,15 @@
-$.ajax({
-    url: '/api/messages/overview',
-    type: "get",
-    success: (data) => {
-        console.log(data);
-        var all_count = 0;
-        data["data"].forEach((e) => {
-            all_count = all_count + e["count"]; 
-            var element = $("#messages-category-" + e["category"].toString() + "-count");
-            e["count"] <= 0 ? element.hide() : element.html(e["count"].toString());
+fetch('/api/messages/overview')
+    .then(data => data.json())
+    .then(data => {
+        let all_count = 0;
+        data.data.forEach(e => {
+            all_count = all_count + e.count; 
+            let element = document.getElementById(`messages-category-${e.category}-count`);
+            e.count <= 0 ? element.style.cssText = "display: none" : element.innerHTML = e.count.toString();
         })
-        var element = $("#messages-count");
-        all_count <= 0 ? element.hide() : element.html(all_count.toString());
-    },
-    error: (err) => {
+        let element = document.getElementById("messages-count");
+        all_count <= 0 ? element.style.cssText = "display: none" : element.innerHTML = all_count.toString();
+    })
+    .catch(err => {
         console.log(err);
-    },
-});
+    })
