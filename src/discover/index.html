@@ -15,7 +15,7 @@
 <body>
     <noscript>肥肠抱歉，js无了，tm能用。</noscript>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top shadow">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="/static/images/logo.png" alt="Logo" width="190" height="37"
@@ -50,18 +50,18 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            消息 <span class="badge text-bg-secondary" id="messages-count">0</span>
+                            消息 <span class="badge rounded-pill text-bg-danger" id="messages-count">0</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">评论与回复 <span class="badge text-bg-secondary"
+                            <li><a class="dropdown-item" href="#">评论与回复 <span class="badge rounded-pill text-bg-danger"
                                         id="messages-category-1-count">0</span></a></li>
-                            <li><a class="dropdown-item" href="#">点赞与收藏 <span class="badge text-bg-secondary"
+                            <li><a class="dropdown-item" href="#">点赞与收藏 <span class="badge rounded-pill text-bg-danger"
                                         id="messages-category-2-count">0</span></a></li>
-                            <li><a class="dropdown-item" href="#">关注消息 <span class="badge text-bg-secondary"
+                            <li><a class="dropdown-item" href="#">关注消息 <span class="badge rounded-pill text-bg-danger"
                                         id="messages-category-5-count">0</span></a></li>
-                            <li><a class="dropdown-item" href="#">反馈与审核 <span class="badge text-bg-secondary"
+                            <li><a class="dropdown-item" href="#">反馈与审核 <span class="badge rounded-pill text-bg-danger"
                                         id="messages-category-3-count">0</span></a></li>
-                            <li><a class="dropdown-item" href="#">系统消息 <span class="badge text-bg-secondary"
+                            <li><a class="dropdown-item" href="#">系统消息 <span class="badge rounded-pill text-bg-danger"
                                         id="messages-category-4-count">0</span></a></li>
                         </ul>
                     </li>
@@ -113,16 +113,20 @@
     <div class="d-flex justify-content-between">
         <div class="left-padding top-padding">
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="discover-lang" id="discover-lang-a"value="all" autocomplete="off" onchange="discover_lang_changed()" checked>
+                <input type="radio" class="btn-check" name="discover-lang" id="discover-lang-a" value="all"
+                    autocomplete="off" onchange="discover_lang_changed()" checked>
                 <label class="btn btn-outline-primary" for="discover-lang-a">所有</label>
 
-                <input type="radio" class="btn-check" name="discover-lang" id="discover-lang-b"value="scratch" autocomplete="off" onchange="discover_lang_changed()">
+                <input type="radio" class="btn-check" name="discover-lang" id="discover-lang-b" value="scratch"
+                    autocomplete="off" onchange="discover_lang_changed()">
                 <label class="btn btn-outline-primary" for="discover-lang-b">TurboWarp</label>
 
-                <input type="radio" class="btn-check" name="discover-lang" id="discover-lang-c"value="python" autocomplete="off" onchange="discover_lang_changed()">
+                <input type="radio" class="btn-check" name="discover-lang" id="discover-lang-c" value="python"
+                    autocomplete="off" onchange="discover_lang_changed()">
                 <label class="btn btn-outline-primary" for="discover-lang-c">Python</label>
 
-                <input type="radio" class="btn-check" name="discover-lang" id="discover-lang-d"value="cpp" autocomplete="off" onchange="discover_lang_changed()">
+                <input type="radio" class="btn-check" name="discover-lang" id="discover-lang-d" value="cpp"
+                    autocomplete="off" onchange="discover_lang_changed()">
                 <label class="btn btn-outline-primary" for="discover-lang-d">C++</label>
             </div>
         </div>
@@ -135,7 +139,7 @@
                     <div class="input-group">
                         <span class="input-group-text" style="border-radius: 0px;">页码</span>
                         <input type="number" min="1" max="200" class="form-control" id="front-page-num"
-                            placeholder="输入页码..." style="border-radius: 0px;"
+                            placeholder="1~200" style="border-radius: 0px; width: 100px;"
                             onkeydown="nav_set_discover_page('front')">
                     </div>
                 </li>
@@ -146,10 +150,12 @@
         </div>
         <div class="right-padding top-padding">
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="discover-category" id="discover-category-a" value="latest" autocomplete="off" onchange="discover_category_changed()" checked>
+                <input type="radio" class="btn-check" name="discover-category" id="discover-category-a" value="latest"
+                    autocomplete="off" onchange="discover_category_changed()" checked>
                 <label class="btn btn-outline-primary" for="discover-category-a">最新发布</label>
 
-                <input type="radio" class="btn-check" name="discover-category" id="discover-category-b" value="popular" autocomplete="off" onchange="discover_category_changed()">
+                <input type="radio" class="btn-check" name="discover-category" id="discover-category-b" value="popular"
+                    autocomplete="off" onchange="discover_category_changed()">
                 <label class="btn btn-outline-primary" for="discover-category-b">最受欢迎</label>
             </div>
         </div>
@@ -166,8 +172,8 @@
             <li class="page-item mb-3">
                 <div class="input-group">
                     <span class="input-group-text" style="border-radius: 0px;">页码</span>
-                    <input type="number" min="1" max="200" class="form-control" id="end-page-num" placeholder="输入页码..."
-                        style="border-radius: 0px;" onkeydown="nav_set_discover_page('end')">
+                    <input type="number" min="1" max="200" class="form-control" id="end-page-num" placeholder="1~200"
+                        style="border-radius: 0px; width: 100px;" onkeydown="nav_set_discover_page('end')">
                 </div>
             </li>
             <li class="page-item" id="end-page-next">
