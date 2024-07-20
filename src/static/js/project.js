@@ -24,12 +24,23 @@ const project_common = async url => {
 const project_html = data => {
     let full_content = "";
     data.forEach(project => {
-        let content = `<div class="col"><div class="card m-3"><a href="${project.link}" class="text-decoration-none">
-        <img src="${project.cover}" class="card-img-top project-card-img" alt="${project.title}">
-        <div class="card-body"><h5 class="card-title">${project.title}</h5>
-        <p class="card-text" style="transform: rotate(0);">
-        <a href="${project.author_url}">${project.author}</a> ${project.infos}</p><p class="card-text">
-        <small class="text-body-secondary">${project.created_at}</small></p></div></a></div></div>`;
+        let content = `
+<div class="col">
+    <div class="card m-3">
+        <a href="${project.link}" class="text-decoration-none">
+            <img src="${project.cover}" class="card-img-top project-card-img" alt="${project.title}">
+            <div class="card-body">
+                <h5 class="card-title">${project.title}</h5>
+                <p class="card-text" style="transform: rotate(0);">
+                    <a href="${project.author_url}">${project.author}</a> ${project.infos}
+                </p>
+                <p class="card-text">
+                    <small class="text-body-secondary">${project.created_at}</small>
+                </p>
+            </div>
+        </a>
+    </div>
+</div>`;
         full_content = full_content + content;
     })
     return full_content;
