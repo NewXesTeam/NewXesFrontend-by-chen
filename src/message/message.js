@@ -3,7 +3,7 @@ fetch('/api/messages/overview')
     .then(data => {
         let all_count = 0;
         data.data.forEach(e => {
-            all_count = all_count + e.count; 
+            all_count = all_count + e.count;
             let element = document.getElementById(`category-messages-${e.category}`);
             e.count <= 0 ? element.style.cssText = "display: none" : element.innerHTML = e.count.toString();
         })
@@ -36,123 +36,81 @@ const _set_message_page = page => {
 const _messages_html = data => {
     let html_content = '';
     data.forEach(e => {
-        e = {
-            "id": 14864111,
-            "send_user_id": 23023609,
-            "receive_user_id": 16944115,
-            "title": null,
-            "content": {
-                "main": {
-                    "id": 4948654,
-                    "topic_id": "CP_54126235",
-                    "parent_id": 0,
-                    "target_id": 0,
-                    "user_id": "23023609",
-                    "reply_user_id": "16944115",
-                    "content": "本想参与，但是手中的Ydu开发任务繁重[尴尬]\n听fixed说你承接了生肉世界了",
-                    "likes": 0,
-                    "unlikes": 0,
-                    "replies": 0,
-                    "top": 0,
-                    "removed": 0,
-                    "links": null,
-                    "created_at": "2024-07-20 16:27:57",
-                    "comment_from": "topic",
-                    "username": "王思涵",
-                    "user_avatar_path": "https://static1.xesimg.com/udc-o-user-avatar/20210531/Talz26v0IeyB-tD11TsRLtuX2Q1437.png",
-                    "reply_username": "刘镕硕",
-                    "emojis": [
-                        {
-                            "id": "[尴尬]",
-                            "url": "https://icourse.xesimg.com/programme/static/images/comments/emoji/尴尬.png",
-                            "content": null,
-                            "type": "image",
-                            "size": "small"
-                        }
-                    ]
-                },
-                "sub": null
-            },
-            "status": 1,
-            "category": 1,
-            "subtype": "comment",
-            "source": 1,
-            "topic_id": "CP_54126235",
-            "read_at": "2024-07-20 16:47:4",
-            "ext": "",
-            "created_at": "2024-07-20 16:27:58",
-            "updated_at": "2024-07-20 16:47:40",
-            "deleted_at": "",
-            "sys_id": 0,
-            "reply_status": 0,
-            "send_username": "王思涵",
-            "send_user_avatar_path": "https://static1.xesimg.com/udc-o-user-avatar/20210531/Talz26v0IeyB-tD11TsRLtuX2Q1437.png",
-            "topic": {
-                "topic_id": "CP_54126235",
-                "project_id": "54126235",
-                "link": "https://code.xueersi.com/home/project/detail?lang=code&pid=54126235&version=webpy&form=webpy&langType=webpy",
-                "text": "NewXesTeam团队成立",
-                "thumbnail": "https://static0.xesimg.com/talcode/assets/py/default-python-thumbnail.png",
-                "lang": "webpy",
-                "version": "webpy",
-                "user_id": 16944115,
-                "published": 1,
-                "published_at": "2024-07-11 21:58:38",
-                "removed": 0,
-                "resource_type": "topic"
-            },
-            "comment_id": 4948654,
-            "has_reply": true
-        }
-        let comment_id = e.comment_id;
-        let comment_type = e.comment_type;
-        let data_time = e.created_at;
-
         let user_avatar = e.send_user_avatar_path;
         let user_name = e.send_username;
         let user_id = e.send_user_id;
 
-        
-        
+        let project_name = e.topic.text;
+        let project_thumb = e.topic.thumbnail;
+        let project_url = e.topic.link;
+
+        let comment_content = e.content.main.content;
+        comment_content = comment_content.replace("\n", "<br>");
+        let comment_target_id = e.content.main.target_id;
+        let comment_date_time = e.content.main.created_at;
+
+        let tip;
+        if (e.subtype === "comment") {
+            tip = `${user_name} 在 ${project_name} 发表了评论。`;
+        } else {
+            let origin_comment = e.content.sub.content;
+            tip = `${user_name} 回复了你的评论：${origin_comment}`
+        }
+
         let content = `
 <li class="list-group-item">
     <div class="d-flex">
         <div>
-            <a href="[space]">
-                <img class="avatar" src="[avatar]">
-            <a>
+            <a href="https://code.xueersi.com/space/${user_id}" target="_blank" style="margin-right: 10px;">
+                <img class="avatar" src="${user_avatar}">
+            </a>
         </div>
         <div class="flex-fill row row-cols-1">
-            <div class="col fs-6">[a] reply [b]: [origin]</div>
-            <div class="col fs-6">[a] comment [work]</div>
-            <div class="col fs-5">[content]</div>
+            <div class="col fs-6">${tip}</div>
+            <div class="col fs-5" style="margin-top: 5px; margin-bottom: 5px;">${comment_content}</div>
             <div class="col fs-6">
-                <span>[DateTime]</span>
+                <span>${comment_date_time}</span>
                 <div class="btn-group btn-group-sm" role="group">
-                    <button type="button" class="btn btn-light" [act]>回复</button>
-                    <button type="button" class="btn btn-light" [act]>删除</button>
+                    <button type="button" class="btn btn-light" [act]${comment_target_id}>回复</button>
+                    <button type="button" class="btn btn-light" [act]${comment_target_id}>删除</button>
                 </div>
             </div>
         </div>
         <div>
-            <a href="[src]">
-                <img class="project" src="[project]">
+            <a href="${project_url}" target="_blank">
+                <img class="project" src="${project_thumb}">
             </a>
         </div>
     </div>
 </li>`
         html_content = html_content + content;
     })
-}
-
-const _set_message = data => {
-
+    return html_content;
 }
 
 const _get_messages = async (category, page) => {
-    let res = await fetch(`https://code.xueersi.com/api/messages?category=${category}&page=${page}&per_page=10`);
+    let res = await fetch(`/api/messages?category=${category}&page=${page}&per_page=10`);
     let data = await res.json();
     data = data.data;
     window.message_last_page = data.last_page;
+    return data.data;
 }
 
+const update_message_box = () => {
+    let message_category_box = document.getElementById("message-category-box");
+    message_category_box.innerHTML = categories[window.message_category];
+}
+
+const load_message = async () => {
+    let data = await _get_messages(window.message_category, window.message_page);
+    let box = document.getElementById("message-content");
+    box.innerHTML = _messages_html(data);
+}
+
+const switch_category = id => {
+    if (id < 1) id = 1;
+    if (id > 5) id = 5;
+    window.message_category = id;
+    window.message_page = 1;
+    load_message();
+}

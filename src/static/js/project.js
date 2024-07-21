@@ -27,12 +27,12 @@ const project_html = data => {
         let content = `
 <div class="col">
     <div class="card m-3">
-        <a href="${project.link}" class="text-decoration-none">
+        <a href="${project.link}" class="text-decoration-none" target="_blank">
             <img src="${project.cover}" class="card-img-top project-card-img" alt="${project.title}">
             <div class="card-body">
                 <h5 class="card-title">${project.title}</h5>
                 <p class="card-text" style="transform: rotate(0);">
-                    <a href="${project.author_url}">${project.author}</a> ${project.infos}
+                    <a href="${project.author_url}" target="_blank">${project.author}</a> ${project.infos}
                 </p>
                 <p class="card-text">
                     <small class="text-body-secondary">${project.created_at}</small>
@@ -48,14 +48,6 @@ const project_html = data => {
 
 const project_follows = async box_id => {
     return project_common("/api/index/works/follows")
-        .then((data) => {
-            let box = document.getElementById(box_id)
-            box.innerHTML = project_html(data)
-        })
-}
-
-const project_discover_common = async (box_id, type, lang, page, per_page) => {
-    return project_common(`/api/works/${type}?lang=${lang}&page=${page}&per_page=${per_page}`)
         .then((data) => {
             let box = document.getElementById(box_id)
             box.innerHTML = project_html(data)

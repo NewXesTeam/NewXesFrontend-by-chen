@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">主页</a>
+                        <a class="nav-link" aria-current="page" href="/">主页</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/discover">发现</a>
@@ -46,24 +46,6 @@
                         <input class="form-control me-2" type="search" placeholder="搜索" aria-label="搜索" name="keyword">
                     </form>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            消息 <span class="badge rounded-pill text-bg-danger" id="messages-count">0</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">评论与回复 <span class="badge rounded-pill text-bg-danger"
-                                        id="messages-category-1-count">0</span></a></li>
-                            <li><a class="dropdown-item" href="#">点赞与收藏 <span class="badge rounded-pill text-bg-danger"
-                                        id="messages-category-2-count">0</span></a></li>
-                            <li><a class="dropdown-item" href="#">关注消息 <span class="badge rounded-pill text-bg-danger"
-                                        id="messages-category-5-count">0</span></a></li>
-                            <li><a class="dropdown-item" href="#">反馈与审核 <span class="badge rounded-pill text-bg-danger"
-                                        id="messages-category-3-count">0</span></a></li>
-                            <li><a class="dropdown-item" href="#">系统消息 <span class="badge rounded-pill text-bg-danger"
-                                        id="messages-category-4-count">0</span></a></li>
-                        </ul>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -90,7 +72,7 @@
                             创作
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/turbowarp/editor.html">TurboWarp</a></li>
+                            <li><a class="dropdown-item" href="/turbowarp/editor.html" target="_blank">TurboWarp</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -120,31 +102,31 @@
                     <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group"
                         style="width: 100%;">
                         <input type="radio" class="btn-check" name="category-select" id="category-select-a"
-                            autocomplete="off" checked>
+                            autocomplete="off" checked onchange="switch_category(1)">
                         <label class="btn btn-outline-primary" for="category-select-a" value="1">
                             评论与回复 <span class="badge rounded-pill text-bg-danger" id="category-messages-1">0</span>
                         </label>
 
                         <input type="radio" class="btn-check" name="category-select" id="category-select-b"
-                            autocomplete="off">
+                            autocomplete="off" onchange="switch_category(2)">
                         <label class="btn btn-outline-primary" for="category-select-b" value="2">
                             点赞与收藏 <span class="badge rounded-pill text-bg-danger" id="category-messages-2">0</span>
                         </label>
 
                         <input type="radio" class="btn-check" name="category-select" id="category-select-c"
-                            autocomplete="off">
+                            autocomplete="off" onchange="switch_category(5)">
                         <label class="btn btn-outline-primary" for="category-select-c" value="5">
                             关注消息 <span class="badge rounded-pill text-bg-danger" id="category-messages-5">0</span>
                         </label>
 
                         <input type="radio" class="btn-check" name="category-select" id="category-select-d"
-                            autocomplete="off">
+                            autocomplete="off" onchange="switch_category(3)">
                         <label class="btn btn-outline-primary" for="category-select-d" value="3">
                             反馈与审核 <span class="badge rounded-pill text-bg-danger" id="category-messages-3">0</span>
                         </label>
 
                         <input type="radio" class="btn-check" name="category-select" id="category-select-e"
-                            autocomplete="off">
+                            autocomplete="off" onchange="switch_category(4)">
                         <label class="btn btn-outline-primary" for="category-select-e" value="4">
                             系统消息 <span class="badge rounded-pill text-bg-danger" id="category-messages-4">0</span>
                         </label>
@@ -158,7 +140,7 @@
             <div class="row row-cols-1 padding">
                 <div class="col">
                     <div class="d-flex justify-content-between">
-                        <h2>[Category]</h2>
+                        <h2 id="message-category-box"></h2>
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-light">全部已读</button>
                             <button type="button" class="btn btn-light">清空已读</button>
@@ -166,34 +148,7 @@
                     </div>
                 </div>
                 <div class="col padding">
-                    <ul class="list-group">
-                        <li class="list-group-item">An item</li>
-                        <li class="list-group-item">A second item</li>
-                        <li class="list-group-item">A third item</li>
-                        <li class="list-group-item">A fourth item</li>
-                        <!-- Template -->
-                        <li class="list-group-item">
-                            <div class="d-flex">
-                                <div>
-                                    <img class="avatar" src="https://static0.xesimg.com/udc-o-user-avatar/20230114/TalzQgrae_RGQQZmVWiP_VGusg1285.png">
-                                </div>
-                                <div class="flex-fill row row-cols-1">
-                                    <div class="col fs-6">a reply b: How are you?</div>
-                                    <div class="col fs-5">What can I say?</div>
-                                    <div class="col fs-6">
-                                        <span>DateTime</span>
-                                        <div class="btn-group btn-group-sm" role="group">
-                                            <button type="button" class="btn btn-light">回复</button>
-                                            <button type="button" class="btn btn-light">删除</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img class="project" src="https://static0.xesimg.com/talcode/assets/py/default-python-thumbnail.png">
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                    <ul class="list-group" id="message-content"></ul>
                 </div>
 
                 <!-- 在JS代码中出现 -->
@@ -233,8 +188,11 @@
     </div>
 
     <script src="/static/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/js/messages.js"></script>
     <script src="/message/message.js"></script>
+    <script>
+        load_message();
+        update_message_box();
+    </script>
 </body>
 
 </html>
