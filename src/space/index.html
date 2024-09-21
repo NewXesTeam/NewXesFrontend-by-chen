@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学而思编程 - 受益一生的能力</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/base.css" rel="stylesheet">
+    <!--<link href="/space/space.css" rel="stylesheet">-->
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <noscript>肥肠抱歉，js无了，tm能用。</noscript>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/static/images/logo.png" alt="Logo" width="190" height="37"
+                    class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">主页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/discover">发现</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">codeUP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">软件下载</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ms-auto">
+                    <form class="d-flex" role="search" action="https://code.xueersi.com/search-center">
+                        <input class="form-control me-2" type="search" placeholder="搜索" aria-label="搜索" name="keyword">
+                    </form>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            消息 <span class="badge rounded-pill text-bg-danger" id="messages-count">0</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">评论与回复 <span class="badge rounded-pill text-bg-danger"
+                                        id="messages-category-1-count">0</span></a></li>
+                            <li><a class="dropdown-item" href="#">点赞与收藏 <span class="badge rounded-pill text-bg-danger"
+                                        id="messages-category-2-count">0</span></a></li>
+                            <li><a class="dropdown-item" href="#">关注消息 <span class="badge rounded-pill text-bg-danger"
+                                        id="messages-category-5-count">0</span></a></li>
+                            <li><a class="dropdown-item" href="#">反馈与审核 <span class="badge rounded-pill text-bg-danger"
+                                        id="messages-category-3-count">0</span></a></li>
+                            <li><a class="dropdown-item" href="#">系统消息 <span class="badge rounded-pill text-bg-danger"
+                                        id="messages-category-4-count">0</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            用户
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/space">个人主页</a></li>
+                            <li><a class="dropdown-item" href="#">作品管理</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">社区公约</a></li>
+                            <li><a class="dropdown-item" href="#">帮助中心</a></li>
+                            <li><a class="dropdown-item" href="#">建议反馈</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">退出</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            创作
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/turbowarp/editor.html">TurboWarp</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Python基础</a></li>
+                            <li><a class="dropdown-item" href="#">Python画图</a></li>
+                            <li><a class="dropdown-item" href="#">Python游戏</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">C++</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Category -->
+    <dialog id="myDialog">
+        <input type="text" id="edit" placeholder="请输入新的个性签名">
+        <button style="border: 1px;" onclick="edit_signature();">更改</button>
+        <button style="border: 1px;" class="edit_signaturehhh" onclick="document.getElementById('myDialog').close();">取消</button>
+    </dialog>
+    <div class="col-auto" align="center"></div>
+    <h2 id="realname" align="center"></h2>
+    <style>
+        i::before{
+            content: "\270d";
+            text-align: center;
+        }
+        #myDialog{
+            border-radius: 10px; 
+            border: 1px solid #ccc; 
+        }
+    </style>
+    <div style="text-align: center;"><span id="signature"></span><i class="a" id="hahaha" style="cursor: pointer;"></i></div>
+    <p id="fan"></p>
+    <script src="/space/space.js"></script>
+    <ul class="list-group list-group-horizontal" style="width: auto;height: auto;justify-content: center;align-items: center;">
+        <li class="list-group-item"><a href="/space/cover/" rel="noopener noreferrer" id="f"><div class="btn from-top">封面</div></a></li>
+        <li class="list-group-item"><a href="/space/" rel="noopener noreferrer" id="e"><div class="btn from-top">主页</div></a></li>
+        <li class="list-group-item"><a href="/space/works/?page=1" rel="noopener noreferrer" id="a"><div class="btn from-top">作品</div></a></li>
+        <li class="list-group-item"><a href="/space/favorites/?page=1" rel="noopener noreferrer" id="b"><div class="btn from-top">收藏</div></a></li>
+        <li class="list-group-item"><a href="/space/fans?page=1" rel="noopener noreferrer" id="c"><div class="btn from-top">粉丝</div></a></li>
+        <li class="list-group-item"><a href="/space/follows?page=1" rel="noopener noreferrer" id="d"><div class="btn from-top">关注</div></a></li>
+    </ul>
+    <hr class="divider">
+    <div align="center">
+        <div class="card" style="width: 45rem;height: auto;" align="center">
+            <h3>成就</h3>
+            <ul class="list-group list-group-horizontal" style="width: auto;">
+                <li class="list-group-item d-flex justify-content-center align-items-center" id="zp">作品：</li>
+                <li class="list-group-item d-flex justify-content-center align-items-center" id="dz">点赞：</li>
+                <li class="list-group-item d-flex justify-content-center align-items-center" id="ll">浏览：</li>
+                <li class="list-group-item d-flex justify-content-center align-items-center" id="gb">被改编：</li>
+                <li class="list-group-item d-flex justify-content-center align-items-center" id="sc">被收藏：</li>
+                <li class="list-group-item"><div>
+                    <a id="dbz" href="javascript:alert('你说你点这干啥');"><img id="thumbnail" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="dbz_name">作者没有设置代表作</p></a>
+                </div></li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <div align="center">
+        <div class="row">
+            <div class="col col-push">
+                <h2 align="left">作品</h2>
+            </div>
+            <div class="col col-pull">
+                <a href="/space/works?page=1" align="right" class="btn from-top" style="color: gold;" id="a1">查看更多</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="work1" href="javascript:alert('你说你点这干啥');"><img id="work1_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="work1_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="work2" href="javascript:alert('你说你点这干啥');"><img id="work2_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="work2_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="work3" href="javascript:alert('你说你点这干啥');"><img id="work3_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="work3_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="work4" href="javascript:alert('你说你点这干啥');"><img id="work4_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="work4_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="work5" href="javascript:alert('你说你点这干啥');"><img id="work5_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="work5_name">不要点</p></a></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="work6" href="javascript:alert('你说你点这干啥');"><img id="work6_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="work6_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="work7" href="javascript:alert('你说你点这干啥');"><img id="work7_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="work7_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="work8" href="javascript:alert('你说你点这干啥');"><img id="work8_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="work8_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="work9" href="javascript:alert('你说你点这干啥');"><img id="work9_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="work9_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="work10" href="javascript:alert('你说你点这干啥');"><img id="work10_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="work10_name">不要点</p></a></div>
+        </div>
+    </div>
+    <hr>
+    <div align="center">
+        <div class="row">
+            <div class="col col-push">
+                <h2 align="left">收藏</h2>
+            </div>
+            <div class="col col-pull">
+                <a href="/space/favorites?page=1" align="right" class="btn from-top" style="color: gold;" id="a2">查看更多</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="favourite1" href="javascript:alert('你说你点这干啥');"><img id="favourite1_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="favourite1_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="favourite2" href="javascript:alert('你说你点这干啥');"><img id="favourite2_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="favourite2_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="favourite3" href="javascript:alert('你说你点这干啥');"><img id="favourite3_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="favourite3_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="favourite4" href="javascript:alert('你说你点这干啥');"><img id="favourite4_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="favourite4_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="favourite5" href="javascript:alert('你说你点这干啥');"><img id="favourite5_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="favourite5_name">不要点</p></a></div>
+        </div>
+    </div>
+    <hr>
+    <div align="center">
+        <div class="row">
+            <div class="col col-push">
+                <h2 align="left">粉丝</h2>
+            </div>
+            <div class="col col-pull">
+                <a href="/space/fans?page=1" align="right" class="btn from-top" style="color: gold;" id="a3">查看更多</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="fan1" href="javascript:alert('你说你点这干啥');"><img id="fan1_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="fan1_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="fan2" href="javascript:alert('你说你点这干啥');"><img id="fan2_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="fan2_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="fan3" href="javascript:alert('你说你点这干啥');"><img id="fan3_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="fan3_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="fan4" href="javascript:alert('你说你点这干啥');"><img id="fan4_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="fan4_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="fan5" href="javascript:alert('你说你点这干啥');"><img id="fan5_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="fan5_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="fan6" href="javascript:alert('你说你点这干啥');"><img id="fan6_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="fan6_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="fan7" href="javascript:alert('你说你点这干啥');"><img id="fan7_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="fan7_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="fan8" href="javascript:alert('你说你点这干啥');"><img id="fan8_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="fan8_name">不要点</p></a></div>
+        </div>
+    </div>
+    <br>
+    <div align="center">
+        <div class="row">
+            <div class="col col-push">
+                <h2 align="left">关注</h2>
+            </div>
+            <div class="col col-pull">
+                <a href="/space/follows?page=1" align="right" class="btn from-top" style="color: gold;" id="a4">查看更多</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="follow1" href="javascript:alert('你说你点这干啥');"><img id="follow1_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="follow1_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="follow2" href="javascript:alert('你说你点这干啥');"><img id="follow2_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="follow2_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="follow3" href="javascript:alert('你说你点这干啥');"><img id="follow3_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="follow3_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="follow4" href="javascript:alert('你说你点这干啥');"><img id="follow4_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="follow4_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="follow5" href="javascript:alert('你说你点这干啥');"><img id="follow5_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="follow5_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="follow6" href="javascript:alert('你说你点这干啥');"><img id="follow6_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="follow6_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="follow7" href="javascript:alert('你说你点这干啥');"><img id="follow7_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="follow7_name">不要点</p></a></div>
+        </div>
+        <div class="col" style="width: auto;height: auto;" align="center">
+            <div class="card"><a id="follow8" href="javascript:alert('你说你点这干啥');"><img id="follow8_img" src="https://t.100tal.com/avatar/%E6%97%A0"><br><p id="follow8_name">不要点</p></a></div>
+        </div>
+    </div>
+    <div class="row row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-4" id="project-follows"></div>
+    <script src="/static/js/project.js"></script>
+    <script src="/static/js/messages.js"></script>
+</body>
+
+</html>

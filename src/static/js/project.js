@@ -9,14 +9,14 @@ const project_common = async url => {
         let link = `https://code.xueersi.com/home/project/detail?lang=${lang}&pid=${project.id}&version=${project.version}&langType=${project.lang}`;
         let title = project.name;
         let author = project.username;
-        let author_url = `https://code.xueersi.com/space/${project.user_id}`;
+        let author_url = `/space/?id=${project.user_id}`;
         let cover = project.thumbnail;
-        let infos = `👀${project.views} 👍${project.likes} 👎${project.unlikes}`;
+        let infos = `👀${project.views} 👍${project.likes}`;
         let created_at = project.created_at;
         let dict = {
             lang, link, title, author, author_url, cover, infos, created_at
         };
-        dicts.push(dict);
+        dicts.push(dict)
     });
     return dicts
 }
@@ -49,7 +49,7 @@ const project_html = data => {
 const project_follows = async box_id => {
     return project_common("/api/index/works/follows")
         .then((data) => {
-            let box = document.getElementById(box_id);
-            box.innerHTML = project_html(data);
+            let box = document.getElementById(box_id)
+            box.innerHTML = project_html(data)
         })
 }
